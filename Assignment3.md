@@ -20,8 +20,7 @@ library(tidyverse)
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
-1. Get the maximum and minimum of GDP per capita for all continents.
---------------------------------------------------------------------
+### 1. Get the maximum and minimum of GDP per capita for all continents.
 
 ``` r
 minGDP <-gapminder %>% 
@@ -71,8 +70,7 @@ knitr::kable(maxGDP)
 
 ![](assignment3_files/figure-markdown_github/unnamed-chunk-2-2.png)
 
-2. Look at the spread of GDP per capita within the continents
--------------------------------------------------------------
+### 2. Look at the spread of GDP per capita within the continents
 
 ``` r
 ggplot(gapminder, aes(gdpPercap))+
@@ -98,8 +96,7 @@ ggplot(gapminder,aes(gdpPercap,continent))+
 
 ![](assignment3_files/figure-markdown_github/unnamed-chunk-3-2.png)
 
-3. Compute a trimmed mean of life expectancy for different years. Or a weighted mean, weighting by population.
---------------------------------------------------------------------------------------------------------------
+### 3. Compute a trimmed mean of life expectancy for different years. Or a weighted mean, weighting by population.
 
 the following is computed to find the 25% trimmed mean which is known as interquartile mean. The interquartile mean as well as the normal mean of lifeExp for each country are found:
 
@@ -125,10 +122,7 @@ knitr::kable(temp)
 |  2002|     68.30965|  65.69492|
 |  2007|     69.68886|  67.00742|
 
-these results can be compared using the below plot:
-===================================================
-
-Red line is the trend of the 25% trimmed mean while the blue line represents the trend of the normal mean.
+These results can be compared using the below plot: Red line is the trend of the 25% trimmed mean while the blue line represents the trend of the normal mean.
 
 ``` r
 ggplot(temp)+
@@ -164,8 +158,7 @@ Compute a weighted mean of lifeExp for different years, weighting by population.
     ## 11  2002                          67.8
     ## 12  2007                          68.9
 
-4. How is life expectancy changing over time on different continents?
----------------------------------------------------------------------
+### 4. How is life expectancy changing over time on different continents?
 
 First, we obtained the mean life expectancy over year on different continents. Then plot the life expectancy changing over time for each continent.
 
@@ -249,8 +242,7 @@ ggplot(temp,aes(year,meanLE))+
 
 ![](assignment3_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
-5. Report the absolute and/or relative abundance of countries with low life expectancy over time by continent: Compute some measure of worldwide life expectancy – you decide – a mean or median or some other quantile or perhaps your current age. Then determine how many countries on each continent have a life expectancy less than this benchmark, for each year.
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+### 5. Report the absolute and/or relative abundance of countries with low life expectancy over time by continent: Compute some measure of worldwide life expectancy – you decide – a mean or median or some other quantile or perhaps your current age. Then determine how many countries on each continent have a life expectancy less than this benchmark, for each year.
 
 ``` r
 ## first compute the median lifeExp as a worldwide life expectancy
@@ -341,8 +333,7 @@ ggplot(newTable,aes(year,newRe))+
 
 ![](assignment3_files/figure-markdown_github/unnamed-chunk-8-1.png)
 
-6. Find countries with interesting stories.
--------------------------------------------
+### 6. Find countries with interesting stories.
 
 It is worth investgating that which country has the higher growing rate within these countries. We first compute the difference in population between the current year entry and the previous year entry. Then the maximum of these changes are computed and for convenience, only the top 6 of the records are plotted. As we can see from the plot, China, Columbia and India has the biggest growth in this time period followed by Indonesia, US and Urugguay.
 
