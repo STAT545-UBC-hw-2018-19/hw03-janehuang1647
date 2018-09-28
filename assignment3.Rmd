@@ -1,0 +1,81 @@
+---
+title: "Assignment 3"
+output: github_document
+---
+
+```{r}
+library(gapminder)
+library(tidyverse)
+```
+
+# Tasks 
+
+## 1. Get the maximum and minimum of GDP per capita for all continents.
+```{r}
+minGDP <-gapminder %>% 
+  group_by(continent,country) %>% 
+  summarize(min=min(gdpPercap)) %>% 
+  summarize(min=min(min)) 
+knitr::kable(minGDP)
+ 
+maxGDP <-gapminder %>% 
+  group_by(continent,country) %>% 
+  summarize(max=max(gdpPercap)) %>% 
+  summarize(max=max(max)) 
+knitr::kable(maxGDP)
+
+  ## plot the minimum of GDP per capital for all continents
+  ggplot(minGDP,aes(continent,min))+
+  geom_point(aes(size=min,color=continent))
+  
+  
+  ## plot the maximum of GDP per capital for all continents
+    ggplot(maxGDP,aes(continent,max))+
+  geom_point(aes(size=max,color=continent))
+  
+  
+```
+
+## 2. Look at the spread of GDP per capita within the continents
+
+```{r}
+ggplot(gapminder, aes(gdpPercap))+
+  facet_wrap(~continent, scales="free_x","free_y")+
+  geom_histogram(aes(fill=continent))
+  
+## we can also use combination of scatter plot and box plot to show the spread of the GDP per capita
+ggplot(gapminder,aes(gdpPercap,continent))+
+  geom_point(aes(colour=continent,size=gdpPercap),alpha=0.4)
+```
+
+
+## 3. Compute a trimmed mean of life expectancy for different years. Or a weighted mean, weighting by population.
+
+the following is computed to find the 25% trimmed mean which is known as interquartile mean. The interquartile mean as well as the normal mean  of lifeExp for each country are found:
+
+```{r}
+temp <-gapminder %>% 
+  group_by(year) %>% 
+  summarize(trimmedMean=mean(lifeExp, trim=0.25),Mean=mean(lifeExp))
+knitr::kable(temp)
+```
+# these results can be compared using the below plot:
+```{r}
+ggplot(temp)+
+  geom_line(aes(year,y=trimmedMean),color="red")+
+  geom_line(aes(year,y=Mean),color="blue")+
+  xlab("year")+
+  ylab("mean")
+```
+
+
+Compute a weighted mean of lifeExp for different years, weighting by population
+
+```{r}
+ gapminder%>% 
+  group_by(year) %>% 
+ summarize(weighted.mean(lifeExp,pop)) 
+
+```
+
+
